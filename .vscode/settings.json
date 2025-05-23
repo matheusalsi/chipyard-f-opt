@@ -1,0 +1,16 @@
+{
+    // Disable IntelliSense engine for cpptools to reduce memory usage
+    "C_Cpp.intelliSenseEngine": "Tag Parser",
+    // Exclude large directories from being parsed (customize as needed)
+    "files.exclude": {
+        "**/generated-src": true,
+        "**/build": true,
+        "**/output": true,
+        "**/sim": true,
+        "**/test_run_dir": true,
+        "**/.idea": true,
+        "**/.bsp": true
+    },
+    // Disable automatic updates for cpptools
+    "C_Cpp.updateChannel": "default",
+}

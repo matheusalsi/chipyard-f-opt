@@ -28,5 +28,5 @@ project/project/
 .ivy2
 .sbt
 .classpath_cache/
-.vscode/
+#.vscode/
 tests/build/
