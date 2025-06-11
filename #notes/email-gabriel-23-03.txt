@@ -1,0 +1,26 @@
+Oi Mateus.
+
+Seguem as informações que eu sei sobre o repositório.
+
+Para instalação e setup, basta seguir as instruções do repositório mesmo (https://github.com/ucb-bar/gemmini). No ano passado tivemos bastante problema pois as instruções estavam desatualizadas, porém após entrar em contato com os donos eles atualizaram a página. Eu acredito que você não deva ter problemas com isso, mas qualquer coisa nos avise.
+
+Com relação às simulações spike, eu rodo elas dentro do diretório /chipyard/generators/gemmini mesmo. Para alterar as configurações da simulação, eu sempre altero 2 arquivos:
+- chipyard/generators/gemmini/software/libgemmini/gemmini_params.h
+- chipyard/generators/gemmini/software/gemmini-rocc-tests/include/gemmini_params.h
+Esses dois arquivos são iguais, e sempre que faço alguma alteração, eu altero os dois de forma igual. Não tenho certeza se isso é realmente necessário, porém no repositório eles tem duas instruções para compilar o gemmini. Eu tenho feito isso e tem dado certo. Pra compilar com o primeiro, no diretório chipyard/generators/gemmini lança esses dois comandos:
+- make -C software/libgemmini clean
+- make -C software/libgemmini install
+Para compilar o segundo, é só entrar no diretório chipyard/generators/gemmini/software/gemmini-rocc-tests e lançar ./build.sh. Para rodar a simulação, tenho lançado o seguinte comando: spike --extension=gemmini ../../generators/gemmini/software/gemmini-rocc-tests/build/imagenet/resnet50-baremetal
+
+Para preparar um sofware customizado pra rodar no Gemmini, eu sugiro conversar com o Enzo do grupo do Discord, ele já fez isso.
+
+Com relação às simulações do verilator, elas são rodadas em chipyard/sims/verilator. Para alterar as configurações do Hardware gerado, basta alterar as configurações do gemmini no seguinte arquivo: chipyard/generators/gemmini/src/main/scala/gemmini/Configs.scala. Um outro detalhe aqui é que, como isso é uma simulação do Hardware rodando o software, eu sempre cuidei pra configurar os arquivos de software que lhe falei antes (gemmini_params.h) e compilar o software antes de rodar as simulações de Hardware. Novamente, não sei se isso é necessário, mas tem dado certo. Com isso, tenho usado dois comandos para as simulações de Hardware:
+- Para gerar o hardware: make CONFIG=GemminiRocketConfig
+- Para rodar a simulação: make CONFIG=GemminiRocketConfig run-binary BINARY=../../generators/gemmini/software/gemmini-rocc-tests/build/imagenet/resnet50-baremetal TIMEOUT_CYCLES=0 LOADMEM=1
+
+Por enquanto é só. Espero que essas informações te ajudem! Qualquer outra dúvida manda lá no grupo que vemos como podemos ajudar.
+
+-- 
+Atenciosamente,
+
+Gabriel Henrique Eisenkraemer

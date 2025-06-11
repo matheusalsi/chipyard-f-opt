@@ -1,0 +1,16 @@
+# BUILD GEMMINI
+- make -C software/libgemmini clean
+- make -C software/libgemmini install
+
+# BUILD SPIKE
+cd software/gemmini-rocc-tests
+./build.sh
+
+# RUN SPIKE
+spike --extension=gemmini chipyard/generators/software/gemmini-rocc-tests/build/imagenet/resnet50-baremetal
+
+# VERILATOR
+cd chipyard/sims/verilator
+- CONFIG: chipyard/generators/gemmini/src/main/scala/gemmini/Configs.scala
+- BUILD: make CONFIG=GemminiRocketConfig
+- RUN: make CONFIG=GemminiRocketConfig run-binary BINARY=../../generators/gemmini/software/gemmini-rocc-tests/build/imagenet/resnet50-baremetal TIMEOUT_CYCLES=0 LOADMEM=1
